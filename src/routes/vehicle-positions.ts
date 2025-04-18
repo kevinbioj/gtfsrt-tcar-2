@@ -22,6 +22,10 @@ export async function vehiclePositions(c: Context) {
 			.with("ORANGE", () => OccupancyStatus.FEW_SEATS_AVAILABLE)
 			.with("RED", () => OccupancyStatus.FULL)
 			.otherwise(() => undefined);
+
+		if (typeof entity.vehicle.timestamp === "number") {
+			entity.vehicle.timestamp += 3600 * 2;
+		}
 	}
 
 	return stream(c, async (stream) => {
